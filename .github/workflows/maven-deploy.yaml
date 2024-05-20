@@ -6,7 +6,7 @@ name: maven-package
 on: 
   push:
     branches:
-    - '*'
+    - 'master'
     tags:
     - '*'
 
@@ -24,9 +24,10 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: 'maven'
-        #server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-        #server-username: GITHUB_REPOSITORY_OWNER # env variable for username in deploy
-        #server-password: GITHUB_TOKEN # env variable for token in deploy
+        # https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#Publishing-using-Apache-Maven
+        #server-id: foobar # Value of the distributionManagement/repository/id field of the pom.xml
+        #server-username: FOOBAR_USERNAME # env variable for username in deploy
+        #server-password: FOOBAR_PASSWORD # env variable for token in deploy
     - run: ls -hal
     - run: env | sort
     # see variables on available contexts (https://docs.github.com/en/actions/learn-github-actions/contexts#github-context)
@@ -41,17 +42,19 @@ jobs:
       run: |
         echo '${{ toJson(github) }}' | jq .
     - run: java -version 
-    - run: >-
+    - name: Dump configuration for Maven
+      run: >-
         cat ~/.m2/settings.xml
     - run: mvn -version
-    - run: mvn -B package shade:shade
+    - run: >-
+        mvn -B package shade:shade
     - run: >-
         java -cp target/hello-maven-world-*.jar acme.HelloMavenWorld
     
-    ## Publish to Github packages (on each new tag)
-    #- run: >-
-    #    mvn -B deploy
-    #  if: >-
-    #    startsWith(github.event.ref, 'refs/tags/1.')
+    # Publish to Github packages (on each new tag)
+    - run: >-
+        mvn -B deploy
+      if: >-
+        startsWith(github.event.ref, 'refs/tags/')
     
 

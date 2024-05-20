@@ -10,12 +10,21 @@
      	<maven.compiler.target>11</maven.compiler.target>
 	</properties>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/drmalex07/hello-maven-world</url>
+        </repository>
+    </distributionManagement>
 
 	<repositories>
 		<repository>
 			<id>github</id>
 			<name>github packages</name>
-			<url>https://maven.pkg.github.com/drmalex07/MAVEN-RELEASES</url>
+            <!-- https://stackoverflow.com/questions/63041402/github-packages-single-maven-repository-for-github-organization -->
+            <!-- https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry#installing-a-package -->
+            <url>https://maven.pkg.github.com/drmalex07/MAVEN-RELEASES</url>
 		</repository>
 	</repositories>
 
