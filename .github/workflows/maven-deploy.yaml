@@ -1,0 +1,57 @@
+name: maven-package
+
+# run manually
+#on: workflow_dispatch
+
+on: 
+  push:
+    branches:
+    - '*'
+    tags:
+    - '*'
+
+jobs:
+  
+  helloworld:
+    runs-on: ubuntu-22.04
+    env:
+      # NOTE: needed for publishing to packages
+      GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: 'maven'
+        #server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
+        #server-username: GITHUB_REPOSITORY_OWNER # env variable for username in deploy
+        #server-password: GITHUB_TOKEN # env variable for token in deploy
+    - run: ls -hal
+    - run: env | sort
+    # see variables on available contexts (https://docs.github.com/en/actions/learn-github-actions/contexts#github-context)
+    - run: >-
+        echo "Github Ref: ${{ github.ref }}"
+    - run: uname -a
+    - run: whoami
+    - run: apt-get --version
+    - run: sudo apt-get install jq
+    - name: Dump github context
+      # https://docs.github.com/en/actions/learn-github-actions/contexts#example-printing-context-information-to-the-log
+      run: |
+        echo '${{ toJson(github) }}' | jq .
+    - run: java -version 
+    - run: >-
+        cat ~/.m2/settings.xml
+    - run: mvn -version
+    - run: mvn -B package shade:shade
+    - run: >-
+        java -cp target/hello-maven-world-*.jar acme.HelloMavenWorld
+    
+    ## Publish to Github packages (on each new tag)
+    #- run: >-
+    #    mvn -B deploy
+    #  if: >-
+    #    startsWith(github.event.ref, 'refs/tags/1.')
+    
+
