@@ -20,6 +20,14 @@
 
     <repositories>
         <repository>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
             <id>github</id>
             <name>github packages</name>
             <!-- https://stackoverflow.com/questions/63041402/github-packages-single-maven-repository-for-github-organization -->
