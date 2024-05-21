@@ -1,14 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>acme</groupId>
-	<artifactId>hello-maven-world</artifactId>
-	<version>0.0.1</version>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>acme</groupId>
+    <artifactId>hello-maven-world</artifactId>
+    <version>0.0.2</version>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>11</maven.compiler.source>
-     	<maven.compiler.target>11</maven.compiler.target>
-	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
 
     <distributionManagement>
         <repository>
@@ -18,24 +18,24 @@
         </repository>
     </distributionManagement>
 
-	<repositories>
-		<repository>
-			<id>github</id>
-			<name>github packages</name>
+    <repositories>
+        <repository>
+            <id>github</id>
+            <name>github packages</name>
             <!-- https://stackoverflow.com/questions/63041402/github-packages-single-maven-repository-for-github-organization -->
             <!-- https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry#installing-a-package -->
             <url>https://maven.pkg.github.com/drmalex07/MAVEN-RELEASES</url>
-		</repository>
-	</repositories>
+        </repository>
+    </repositories>
 
-	<dependencies>
-		<dependency>
-			<groupId>acme</groupId>
-			<artifactId>hello-maven</artifactId>
-			<version>1.0.5</version>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>acme</groupId>
+            <artifactId>hello-maven</artifactId>
+            <version>1.0.5</version>
+        </dependency>
+    </dependencies>
 
-	<build></build>
+    <build></build>
 
 </project>

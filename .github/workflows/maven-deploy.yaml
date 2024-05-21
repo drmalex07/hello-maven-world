@@ -10,6 +10,11 @@ on:
     tags:
     - '*'
 
+permissions:
+  contents: read
+  packages: write
+  statuses: read
+
 jobs:
   
   helloworld:
